@@ -18,7 +18,9 @@
 
     .clip-inner {
         display: flex;
-        background: rgb(29, 221, 255);
+        flex-direction: column;
+        background: rgb(174,29,255);
+        background: linear-gradient(130deg, rgba(174,29,255,1) 0%, rgba(255,0,184,1) 100%);
         border-radius: 10px;
         width: 100%;
         clip-path: circle(10% at 0% 0%);
@@ -35,22 +37,6 @@
             color: white;
             font-size: 1.2rem;
             padding: .5rem;
-        }
-
-        .clip-fade-in {
-            border-radius: 10px;
-            background: rgb(174,29,255);
-            background: linear-gradient(130deg, rgba(174,29,255,1) 0%, rgba(255,0,184,1) 100%);
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            clip-path: circle(5% at 0% 0%);
-            transition: all .4s ease-in-out;
-        }
-
-        &:hover .clip-fade-in {
-            clip-path: circle(80%);
         }
     }
 
