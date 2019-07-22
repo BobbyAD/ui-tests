@@ -1,12 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import ClipPath from './components/clip-path-test/ClipPath';
+import Main from './components/Main';
+import { CssBaseline, MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+
+
 
 function App() {
+
+    const theme = createMuiTheme({
+        palette: {
+            background: {
+                default: "rgb(29,29,29)",
+            },
+        }
+    })
+
+
     return (
         <div className="App">
-            <ClipPath />
+            <MuiThemeProvider theme={theme}>
+                <CssBaseline />
+                <Main />
+            </MuiThemeProvider>
         </div>
     );
 }
