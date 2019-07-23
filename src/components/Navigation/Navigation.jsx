@@ -73,7 +73,7 @@ const Main = () => {
             <Drawer classes={classes.drawer} anchor="left" open={open} onClose={toggleDrawer}>
                 <div className={classes.drawerDiv}>
                     <List className={classes.list}>
-                        <ListItem className={classes.listItem} button component={Link} to="/">
+                        <ListItem className={classes.listItem} button onClick={toggleDrawer} component={Link} to="/">
                             <ListItemText primary="Home" />
                         </ListItem>
                         <ListItem className={classes.listItem} button onClick={handleClick}>
@@ -87,7 +87,7 @@ const Main = () => {
                                 <ListItemText primary="More Soon" />
                             </ListItem>
                         </Collapse>
-                        <ListItem button className={classes.listItem} component={Link} to="/stepper-dots" >
+                        <ListItem button className={classes.listItem} onClick={toggleDrawer} component={Link} to="/stepper-dots" >
                             <ListItemText primary="Stepper Dots" />
                         </ListItem>
                     </List>
