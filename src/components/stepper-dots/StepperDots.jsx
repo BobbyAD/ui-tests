@@ -7,7 +7,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { StepConnector } from '@material-ui/core';
+import { StepConnector, StepIcon } from '@material-ui/core';
 
 const StepperDots = () => {
 
@@ -44,24 +44,49 @@ const StepperDots = () => {
     const connectorClasses = makeStyles(theme => ({
         connectorActive: {
             '& $connectorLine': {
-                border: '3px solid blue',
-                marginTop: '-2px',
+                borderTop: '8px solid green',
                 borderRadius: '2px',
+                marginTop: '-2px',
             },
         },
         connectorCompleted: {
             '& $connectorLine': {
-                borderColor: 'pink',
+                borderTop: '8px solid orange',
+                borderRadius: '2px',
+                marginTop: '-2px'
             },
         },
         connectorDisabled: {
             '& $connectorLine': {
-                borderColor: 'white',
+                borderTop: '8px solid white',
+                borderRadius: '2px',
+                marginTop: '-2px'
             },
         },
         connectorLine: {
             transition: theme.transitions.create('border-color'),
         },
+        connectorRoot: {
+            zIndex: 0,
+            width: '150px',
+            left: 'calc(-50%)'
+        }
+    }))();
+
+    const stepClasses = makeStyles(theme => ({
+        stepRoot: {
+            color: 'cyan',
+            zIndex: 10
+        },
+        stepCompleted: {
+            color: 'pink'
+        },
+        stepDisabled: {
+            color: 'magenta'
+        },
+        stepActive: {
+            color: 'pink',
+        }
     }))();
 
     const connector = (
@@ -70,17 +95,46 @@ const StepperDots = () => {
             completed: connectorClasses.connectorCompleted,
             disabled: connectorClasses.connectorDisabled,
             line: connectorClasses.connectorLine,
+            root: connectorClasses.connectorRoot,
         }} />
     )
 
     return (
         <div className={classes.root}>
             <Stepper className={classes.stepper} activeStep={activeStep} connector={connector} alternativeLabel>
-                {steps.map(step => (
-                    <Step className={classes.step} key={step}>
-                        <StepLabel>{step}</StepLabel>
-                    </Step>
-                ))}
+                <Step className={classes.step}>
+                    <StepLabel
+                        StepIconProps={{
+                            classes: {
+                                root: stepClasses.stepRoot,
+                                completed: stepClasses.stepCompleted,
+                                active: stepClasses.stepActive,
+                            }
+                        }}
+                    ></StepLabel>
+                </Step>
+                <Step className={classes.step}>
+                    <StepLabel
+                        StepIconProps={{
+                            classes: {
+                                root: stepClasses.stepRoot,
+                                completed: stepClasses.stepCompleted,
+                                active: stepClasses.stepActive,
+                            }
+                        }}
+                    ></StepLabel>
+                </Step>
+                <Step className={classes.step}>
+                    <StepLabel
+                        StepIconProps={{
+                            classes: {
+                                root: stepClasses.stepRoot,
+                                completed: stepClasses.stepCompleted,
+                                active: stepClasses.stepActive,
+                            }
+                        }}
+                    ></StepLabel>
+                </Step>
             </Stepper>
             <div>
                 <Button
