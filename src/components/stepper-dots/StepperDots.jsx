@@ -15,18 +15,6 @@ const StepperDots = () => {
     const [activeStep, setActiveStep] = useState(0);
     const [steps, setSteps] = useState(['', '', ''])
 
-    function handleBack() {
-        setActiveStep(prevActiveStep => prevActiveStep - 1);
-    }
-
-    function handleReset() {
-        setActiveStep(0);
-    }
-
-    function handleNext() {
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
-    }
-
     const classes = makeStyles(theme => ({
         root: {
             display: 'flex',
@@ -113,6 +101,18 @@ const StepperDots = () => {
         } else {
             return ""
         }
+    }
+
+    function handleBack() {
+        setActiveStep(prevActiveStep => prevActiveStep - 1);
+    }
+
+    function handleReset() {
+        setActiveStep(0);
+    }
+
+    function handleNext() {
+        setActiveStep(prevActiveStep => prevActiveStep + 1);
     }
 
     return (
