@@ -4,6 +4,8 @@ import { makeStyles, Toolbar, Typography, Drawer, List, ListItem, Collapse, List
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import { Link } from 'react-router-dom';
+
 const Main = () => {
 
     const [open, setOpen] = useState(false);
@@ -13,7 +15,7 @@ const Main = () => {
         setCollapseOpen(!collapseOpen);
     }
 
-    const classes = makeStyles({
+    const classes = makeStyles(theme => ({
         root: {
             display: "flex"
         },
@@ -43,8 +45,9 @@ const Main = () => {
         },
         collapse: {
             marginLeft: "10%",
-        }
-    })();
+        },
+        toolbar: theme.mixins.toolbar,
+    }))();
 
     const toggleDrawer = () => {
         setOpen(!open);
@@ -52,7 +55,7 @@ const Main = () => {
 
     return (
         <div>
-            <AppBar position="fixed" className={classes.appBar}>
+            <AppBar position="absolute" className={classes.appBar}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -70,20 +73,27 @@ const Main = () => {
             <Drawer classes={classes.drawer} anchor="left" open={open} onClose={toggleDrawer}>
                 <div className={classes.drawerDiv}>
                     <List className={classes.list}>
+                        <ListItem className={classes.listItem} button component={Link} to="/">
+                            <ListItemText primary="Home" />
+                        </ListItem>
                         <ListItem className={classes.listItem} button onClick={handleClick}>
                             <ListItemText primary="Cards" />
                         </ListItem>
                         <Collapse className={classes.collapse} component="li" in={collapseOpen} timeout="auto" unmountOnExit>
-                            <ListItem className={classes.listItem} >
-                                <ListItemText primary="Clip Path" />
+                            <ListItem button className={classes.listItem} component={Link} to="/clip-path-test">
+                                <ListItemText primary="Clip Path" onClick={toggleDrawer} />
                             </ListItem>
-                            <ListItem className={classes.listItem} >
+                            <ListItem button className={classes.listItem} >
                                 <ListItemText primary="More Soon" />
                             </ListItem>
                         </Collapse>
+                        <ListItem button className={classes.listItem} component={Link} to="/stepper-dots" >
+                            <ListItemText primary="Stepper Dots" />
+                        </ListItem>
                     </List>
                 </div>
             </Drawer>
+            <div className={classes.toolbar} />
         </div>
     )
 }
