@@ -1,12 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { CssBaseline, MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core';
+
+import {Switch, Route } from 'react-router-dom';
+
+import Navigation from './components/Navigation/Navigation';
+import LandingPage from './components/LandingPage/LandingPage';
 import ClipPath from './components/clip-path-test/ClipPath';
 
+
+
 function App() {
+
+    const theme = createMuiTheme({
+        palette: {
+            background: {
+                default: "rgb(29,29,29)",
+            },
+        }
+    })
+
     return (
         <div className="App">
-            <ClipPath />
+            <MuiThemeProvider theme={theme}>
+                <CssBaseline />
+                <div>
+                    <Navigation />
+                </div>
+                <div>
+                    <Switch>
+                        <Route path="/" exact component={LandingPage} />
+                        <Route path="/clip-path-test" exact component={ClipPath} />
+                    </Switch>
+                </div>
+            </MuiThemeProvider>
         </div>
     );
 }
