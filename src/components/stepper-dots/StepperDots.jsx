@@ -7,7 +7,8 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { StepConnector, StepIcon } from '@material-ui/core';
+import { StepConnector } from '@material-ui/core';
+import LensIcon from '@material-ui/icons/Lens'
 
 const StepperDots = () => {
 
@@ -39,31 +40,43 @@ const StepperDots = () => {
             background: 'rgba(0,0,0,0)',
             width: '500px',
         },
+        icon: {
+            zIndex: 2,
+            color: '#d0ccff',
+            '& $active': {
+                color: '#5b4eff',
+            },
+        },
     }))();
 
     const connectorClasses = makeStyles(theme => ({
         connectorActive: {
             '& $connectorLine': {
-                borderTop: '8px solid green',
+                borderTop: '8px solid #5b4eff',
                 borderRadius: '2px',
                 marginTop: '-2px',
             },
         },
         connectorCompleted: {
             '& $connectorLine': {
-                borderTop: '8px solid orange',
+                borderTop: '8px solid #5b4eff',
                 borderRadius: '2px',
                 marginTop: '-2px'
             },
         },
         connectorDisabled: {
             '& $connectorLine': {
-                borderTop: '8px solid white',
+                borderTop: '8px solid #d0ccff',
                 borderRadius: '2px',
                 marginTop: '-2px'
             },
         },
         connectorLine: {
+            '& $connectorLine': {
+                borderTop: '8px solid #d0ccff',
+                borderRadius: '2px',
+                marginTop: '-2px'
+            },
             transition: theme.transitions.create('border-color'),
         },
         connectorRoot: {
@@ -75,17 +88,12 @@ const StepperDots = () => {
 
     const stepClasses = makeStyles(theme => ({
         stepRoot: {
-            color: 'cyan',
-            zIndex: 10
-        },
-        stepCompleted: {
-            color: 'pink'
-        },
-        stepDisabled: {
-            color: 'magenta'
-        },
-        stepActive: {
-            color: 'pink',
+            zIndex: 2,
+            color: '#d0ccff',
+            '&.active': {
+                color: '#5b4eff',
+            },
+            transition: theme.transitions.create('color'),
         }
     }))();
 
@@ -99,52 +107,44 @@ const StepperDots = () => {
         }} />
     )
 
+    const activateStepIcon = (step) => {
+        if (activeStep >= step) {
+            return "active"
+        } else {
+            return ""
+        }
+    }
+
     return (
         <div className={classes.root}>
             <Stepper className={classes.stepper} activeStep={activeStep} connector={connector} alternativeLabel>
                 <Step className={classes.step}>
-                    <StepLabel
-                        StepIconProps={{
-                            classes: {
-                                root: stepClasses.stepRoot,
-                                completed: stepClasses.stepCompleted,
-                                active: stepClasses.stepActive,
-                            }
-                        }}
-                    ></StepLabel>
+                    <StepLabel StepIconProps={{
+                        icon: (<LensIcon classes={{ root: stepClasses.stepRoot }} className={activateStepIcon(0)} />)
+                    }} />
                 </Step>
                 <Step className={classes.step}>
-                    <StepLabel
-                        StepIconProps={{
-                            classes: {
-                                root: stepClasses.stepRoot,
-                                completed: stepClasses.stepCompleted,
-                                active: stepClasses.stepActive,
-                            }
-                        }}
-                    ></StepLabel>
+                    <StepLabel StepIconProps={{
+                        icon: (<LensIcon classes={{ root: stepClasses.stepRoot }} className={activateStepIcon(1)} />)
+                    }} />
                 </Step>
                 <Step className={classes.step}>
-                    <StepLabel
-                        StepIconProps={{
-                            classes: {
-                                root: stepClasses.stepRoot,
-                                completed: stepClasses.stepCompleted,
-                                active: stepClasses.stepActive,
-                            }
-                        }}
-                    ></StepLabel>
+                    <StepLabel StepIconProps={{
+                        icon: (<LensIcon classes={{ root: stepClasses.stepRoot }} className={activateStepIcon(2)} />)
+                    }} />
                 </Step>
             </Stepper>
             <div>
                 <Button
+                    variant="contained"
+                    color="primary"
                     disabled={activeStep === 0}
                     onClick={handleBack}
                     className={classes.backButton}
                 >
                     Back
                 </Button>
-                <Button variant="contained" color="primary" onClick={handleNext}>
+                <Button variant="contained" color="secondary" onClick={handleNext}>
                     {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
             </div>
